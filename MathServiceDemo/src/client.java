@@ -7,11 +7,20 @@ import java.rmi.Naming;
  * @author espnosa
  */
 public class client {
-	public static void main ( String args[] ) throws Exception {		
+	public static void main ( String args[] ) throws Exception {
 		String url = "rmi://localhost:1099/MathService";
 		MathService mathService = (MathService)Naming.lookup(url);
-		
-		int square = mathService.square(2);
-		System.out.println(square);
+
+		if(args.length > 0)
+			for(int i=0; i<args.length; i++)
+			{
+				int n= Integer.parseInt(args[i]);
+				int square = mathService.square(n);
+				System.out.println(square);
+			}
+		else
+			System.err.println("you should pass at least one number in the arguments");
+
+		System.out.println("demo terminated");
 	}
 }
